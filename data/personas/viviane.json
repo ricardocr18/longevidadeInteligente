@@ -1,0 +1,99 @@
+{
+  "user_id": "viviane",
+  "nome": "Viviane",
+  "tratamento": "Senhora Viviane",
+  "idade": 80,
+  "sexo": "mulher",
+  "estado_civil": "casada",
+  "conjuge": { "nome": "não especificado no roteiro", "observacao": "Tem escritório de engenharia." },
+  "filhos": [
+    { "nome": "Vania", "situacao": "Casada, trabalha em um escritório." },
+    { "nome": "Vanusa", "situacao": "Casada, se recuperando de um câncer de mama — momento delicado para Viviane." }
+  ],
+  "netos": [
+    { "nome": "Stefani", "observacao": "Adolescente, filha de Vanusa. Viviane às vezes fica com ela." }
+  ],
+
+  "biografia": {
+    "profissao": "Dona de casa. Formada em Pedagogia, fez estágio e trabalhou em escola por 3 anos após o casamento.",
+    "instrucao": "Ensino superior (Pedagogia).",
+    "escolaridade_nivel": "superior",
+    "marcos_de_vida": [
+      "Formou-se em Pedagogia e trabalhou como professora por um período antes de se dedicar à família.",
+      "Criou duas filhas, hoje ambas casadas.",
+      "Vive atualmente um momento sensível: a filha Vanusa está se recuperando de câncer de mama."
+    ]
+  },
+
+  "saude": {
+    "comorbidades": ["hipertensão", "diabetes", "sobrepeso", "depressão"],
+    "medicamentos": [
+      "Metformina — parte da manhã ('caixinha azul') e segunda dose antes do almoço",
+      "Losartana — manhã ('caixinha azul')",
+      "Sertralina — 1x à noite (antidepressivo)",
+      "2 medicamentos adicionais, 3x ao dia (nomes não especificados no roteiro — validar com receituário real)"
+    ],
+    "atividade_fisica": "Sedentária no geral; faz fisioterapia funcional guiada (sessões com exercícios como sentar e levantar).",
+    "alimentacao": "Tenta seguir dieta rígida, mas costuma abandonar antes de completar.",
+    "alertas": [
+      "Comorbidade de depressão — atenção redobrada a sinais de desesperança, isolamento ou fala que sugira risco. Seguir Protocolo de Dia Difícil nível grave sem hesitar caso apareçam sinais de risco à segurança.",
+      "Mora sozinha — reforçar checagens de segurança física e vínculo social externo com mais frequência do que faria com quem mora acompanhado."
+    ]
+  },
+
+  "contexto_social": {
+    "arranjo_domiciliar": "Mora sozinha, com apoio de uma diarista durante a semana.",
+    "rede_social": "Dá suporte ocasional à filha mais velha; fica com a neta adolescente Stefani; frequenta a igreja e um grupo de senhoras voluntárias.",
+    "religiao": "Evangélica — aguardar a própria pessoa trazer o tema antes de referenciar.",
+    "nivel_socioeconomico_rotina": "Contexto familiar com recursos (marido com escritório de engenharia); apoio de diarista indica situação financeira confortável. Pode-se sugerir atividades e produtos com um pouco mais de amplitude do que em perfis de renda mais restrita, sem exagerar."
+  },
+
+  "preferencias": {
+    "entretenimento": [
+      "ler romances",
+      "assistir séries de época e de família",
+      "ouvir música clássica durante o dia",
+      "pintar telas"
+    ],
+    "instrumento_musical": "piano",
+    "letramento_digital": "Celular, WhatsApp, uso básico de internet — priorizar mensagens curtas e voz."
+  },
+
+  "plano_cuidado": [
+    "Tomar Metformina e Losartana pela manhã ('caixinha azul').",
+    "Tomar segunda dose de Metformina antes do almoço.",
+    "Tomar Sertralina à noite, sem falhar — item crítico dado o quadro de depressão.",
+    "Medir glicemia pela manhã e à noite.",
+    "Participar da fisioterapia funcional guiada, respeitando o limite de dor durante os exercícios.",
+    "Buscar 30 minutos de atividade com propósito (ex.: revisar material do grupo de voluntárias) nas tardes.",
+    "Registrar humor em escala 0-10 no meio da tarde, dado o histórico de depressão.",
+    "Incentivar contato com a filha Vanusa (em recuperação) sem pressionar — respeitar o tempo dela para topar.",
+    "Fechar o dia com prática de respiração 4-7-8 quando o dia tiver sido mais pesado emocionalmente."
+  ],
+
+  "objetivos_indicadores": [
+    { "objetivo": "Manter glicemia e pressão arterial controladas", "indicador": "Medicação tomada nos horários certos; glicemia registrada 2x/dia." },
+    { "objetivo": "Cuidar da saúde emocional dado o quadro de depressão", "indicador": "Humor registrado diariamente; nenhum sinal de risco sem escalonamento imediato." },
+    { "objetivo": "Reduzir sedentarismo com segurança", "indicador": "Adesão às sessões de fisioterapia funcional, respeitando limites de dor." },
+    { "objetivo": "Manter vínculo social apesar de morar sozinha", "indicador": "Contato regular com filhas, neta e grupo de voluntárias/igreja." }
+  ],
+
+  "rotina_dia_exemplo": {
+    "acordar": "07h00",
+    "depois_cafe_proposito_do_dia": "08h30",
+    "fisioterapia_funcional": "10h00",
+    "almoco": "12h30",
+    "proposito_e_cognicao": "14h30",
+    "monitor_de_humor": "16h00",
+    "jantar": "19h10",
+    "fechamento_biopsicossocial": "21h00"
+  },
+
+  "exemplos_dialogo": [
+    { "momento": "acordar", "vivia": "Bom dia, Senhora Viviane. Como você está hoje?", "viviane": "Dormi picado, acordei pensando na vida." },
+    { "momento": "acordar", "vivia": "Obrigada por me contar. Quer falar um pouco sobre o que passou pela sua cabeça?", "viviane": "Não sei se tenho vontade de falar sobre isso agora, Vivia." },
+    { "momento": "fisioterapia_funcional", "vivia": "Avise se sentir dor, tá bem?", "viviane": "No sexto já está ardendo." },
+    { "momento": "monitor_de_humor", "vivia": "De 0 a 10, como está seu ânimo agora?", "viviane": "Subiu para 5. Ainda sinto falta da Vanusa, mas o trabalho de hoje me distraiu." },
+    { "momento": "fechamento_biopsicossocial", "vivia": "Bom número. Três motivos de gratidão de hoje?", "viviane": "Hoje só consigo pensar em um: o cheiro do almoço. Foi um dia mais pesado." }
+  ]
+}

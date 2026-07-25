@@ -1,0 +1,104 @@
+{
+  "user_id": "joao",
+  "nome": "João",
+  "tratamento": "Senhor João",
+  "idade": 65,
+  "sexo": "homem",
+  "estado_civil": "casado",
+  "conjuge": { "nome": "Lúcia", "tratamento": "Dona Lúcia" },
+  "filhos": [
+    { "nome": "Josi", "situacao": "Casada, acabou de ter um bebê." },
+    { "nome": "Jorge", "situacao": "Analista financeiro, namorando." }
+  ],
+  "netos": [
+    { "nome": "não especificado no roteiro", "observacao": "João ensina pandeiro ao neto nos fins de semana." }
+  ],
+
+  "biografia": {
+    "profissao": "Ex-líder de linha operacional em empresa grande. Aposentado, trabalha meio período em uma loja perto de casa.",
+    "instrucao": "Curso técnico.",
+    "escolaridade_nivel": "tecnica",
+    "marcos_de_vida": [
+      "Liderou equipes operacionais por muitos anos antes de se aposentar.",
+      "Manteve-se ativo profissionalmente mesmo após aposentar — trabalha meio período por opção, não necessidade aparente.",
+      "Neto pequeno na família (filha Josi) — momento de alegria recente."
+    ]
+  },
+
+  "saude": {
+    "comorbidades": ["hipertensão", "ansiedade"],
+    "biotipo": "magro",
+    "medicamentos": [
+      "2 medicamentos para hipertensão, 2x ao dia"
+    ],
+    "atividade_fisica": "Caminha com os amigos na pracinha perto de casa, a maior parte dos dias.",
+    "alimentacao": "Come de tudo, faz 4 refeições por dia.",
+    "alertas": [
+      "Ansiedade: episódios pontuais (coração disparado, agonia) já registrados 2x em uma semana em cena de dia difícil — se recorrência aumentar, sugerir avaliação médica."
+    ]
+  },
+
+  "contexto_social": {
+    "arranjo_domiciliar": "Mora com a esposa, Dona Lúcia, e um filho.",
+    "rede_social": "Relaciona-se com amigos do clube e do bairro; grupo de WhatsApp 'Amigos da praça'.",
+    "religiao": "Espírita — aguardar a própria pessoa trazer o tema antes de referenciar.",
+    "nivel_socioeconomico_rotina": "Aposentado com renda complementar do trabalho meio período. Sugestões de alimentação e atividade devem ser de baixo custo e caber na rotina de quem ainda trabalha parte do dia."
+  },
+
+  "preferencias": {
+    "entretenimento": [
+      "assistir TV, filmes de ação",
+      "jogar cartas (truco)",
+      "reunir-se com amigos",
+      "ouvir música no churrasco de fim de semana"
+    ],
+    "instrumento_musical": "pandeiro",
+    "letramento_digital": "Celular, WhatsApp, uso básico de internet — priorizar mensagens curtas e voz."
+  },
+
+  "plano_cuidado": [
+    "Definir alarme no celular para os 2 medicamentos, 2x/dia.",
+    "Registrar pressão arterial 2x/semana (farmácia, aparelho doméstico ou UBS).",
+    "Praticar exercícios respiratórios (5 min) antes de dormir.",
+    "Participar da roda de conversa no centro espírita 1x/semana, se ele trouxer o tema.",
+    "Limitar TV até 22h.",
+    "Manter caminhada com amigos, 40 min, 5x/semana.",
+    "Acrescentar alongamentos de 10 min antes da caminhada.",
+    "Reduzir sal no churrasco, temperando com ervas.",
+    "Trocar refrigerantes por sucos ou água com gás e limão.",
+    "Manter jogos de cartas 2x/semana.",
+    "Ensinar pandeiro ao neto nos fins de semana.",
+    "Consulta médica semestral: pressão, hemograma, função renal, lipidograma.",
+    "Oftalmologista anual (retinopatia hipertensiva)."
+  ],
+
+  "objetivos_indicadores": [
+    { "objetivo": "Manter a pressão arterial controlada (<130/80 mmHg)", "indicador": "≥90% das doses tomadas; pressão em meta por 3 meses consecutivos." },
+    { "objetivo": "Reduzir ansiedade e melhorar qualidade do sono", "indicador": "Escala subjetiva de ansiedade reduzida em 30% em 2 meses; dormir ≥7h/noite, 5 dias/semana." },
+    { "objetivo": "Manter IMC saudável e disposição física", "indicador": "≥7.000 passos/dia." },
+    { "objetivo": "Estímulo cognitivo e social", "indicador": "Pelo menos 3 eventos sociais por semana." }
+  ],
+
+  "rotina_dia_exemplo": {
+    "acordar": "06h40",
+    "cafe_manha": "07h00",
+    "antes_de_sair": "07h50",
+    "meio_manha": "10h00 (pausa na loja, via WhatsApp)",
+    "fim_turno_loja": "12h05",
+    "almoco": "12h45",
+    "meio_tarde": "14h30",
+    "lanche_estimulo_cognitivo": "16h00",
+    "atividade_fisica_casa": "18h00",
+    "jantar": "19h00",
+    "antes_dormir": "21h15",
+    "fechamento_dia": "22h00"
+  },
+
+  "exemplos_dialogo": [
+    { "momento": "acordar", "vivia": "Bom dia, Senhor João e Dona Lúcia! Dormiram bem?", "joao": "Dormi bem, sim, tranquilo." },
+    { "momento": "antes_de_sair", "vivia": "Senhor João, antes de ir: topa 2 minutinhos de alongamento no pescoço?", "joao": "Topo, rapidinho." },
+    { "momento": "meio_manha", "vivia": "Pausa rápida: já bebeu um copo de água agora?", "joao": "Já, agora mesmo." },
+    { "momento": "jantar", "vivia": "Alguma ideia para o jantar de hoje?", "joao": "Não tinha pensado ainda, pode sugerir?" },
+    { "momento": "fechamento_dia", "vivia": "Vamos fechar o dia? Toda a medicação de hoje foi tomada certinha?", "joao": "Foi sim, as duas doses." }
+  ]
+}

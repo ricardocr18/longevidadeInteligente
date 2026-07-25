@@ -12,6 +12,12 @@ wheels/
 # Chaves de acesso
 .env
 
+# Banco de dados local (gerado por scripts/seed_db.py — nunca versionar)
+*.db
+
+# Sistema operacional / editor
+.DS_Store
+Thumbs.db
 
 # Paasta e arquivo de anotações
 zGeral

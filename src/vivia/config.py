@@ -9,7 +9,8 @@ class Settings(BaseSettings):
 
     # OpenAI
     openai_api_key: str
-    openai_model: str = "gpt-4o"
+    # openai_model: str = "gpt-4o"
+    openai_model: str = "gpt-5.6-luna"
 
     # ElevenLabs (opcionais na Fase 1)
     elevenlabs_api_key: str = ""

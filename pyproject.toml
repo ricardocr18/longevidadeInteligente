@@ -19,10 +19,10 @@ dependencies = [
     "langchain-openai>=0.2",
     "langchain-core>=0.2",
     # Fase 3 — descomentar quando Fase 2 tiver DoD cumprido
-    # "fastapi>=0.111",
-    # "uvicorn[standard]>=0.30",    
-    # "elevenlabs>=1.5",
-    # "python-multipart>=0.0.9",
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.30",
+    "elevenlabs>=1.5",
+    "python-multipart>=0.0.9",
 ]
 
 [project.scripts]

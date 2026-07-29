@@ -13,22 +13,11 @@
       <span class="brand-mark" aria-hidden="true">✦</span>
       <span class="brand-name">Vivia</span>
     </div>
-    <button id="settings-toggle" class="settings-toggle" aria-expanded="false" aria-controls="settings-panel">
-      Ajustes
-    </button>
-  </header>
-
-  <section id="settings-panel" class="settings-panel" hidden>
-    <div class="field">
-      <label for="persona-select">Conversando com</label>
+    <div class="persona-picker">
+      <label for="persona-select" class="sr-only">Conversando com</label>
       <select id="persona-select"></select>
     </div>
-    <div class="field" id="moment-field" hidden>
-      <label for="moment-select">Momento do dia (modo de teste)</label>
-      <select id="moment-select"></select>
-    </div>
-    <button id="restart-btn" class="secondary-btn">Reiniciar conversa</button>
-  </section>
+  </header>
 
   <main class="stage">
     <div class="orb-wrap">

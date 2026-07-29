@@ -3,7 +3,7 @@ from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from langchain_core.messages import HumanMessage, AIMessage
 
@@ -18,6 +18,7 @@ from vivia.memory.repository import (
     delete_today_messages,
     save_message,
 )
+from vivia.memory.summarizer import ensure_summaries_up_to_date
 from vivia.voice.stt import transcribe_audio
 from vivia.voice.tts import synthesize_speech
 
@@ -66,13 +67,21 @@ def _rebuild_messages(rows: list[dict]) -> list:
 
 
 def _process_turn(user_id: str, user_text: str | None, moment_override: str | None) -> dict:
+    session_date = date.today().isoformat()
+
+    # Checagem de virada de dia: se algum dia anterior ficou sem resumo,
+    # gera agora, antes de continuar. Barato quando não há pendência.
+    ensure_summaries_up_to_date(user_id, before_date=session_date)
+
     persona = load_persona(user_id)
     persona_text = persona_to_prompt(persona)
     summaries_text = format_summaries_for_prompt(get_recent_summaries(user_id))
 
-    session_date = date.today().isoformat()
     messages = _rebuild_messages(get_today_messages(user_id, session_date))
 
+    # Em produção, o momento SEMPRE vem do relógio real. A escolha manual
+    # só existe fora de produção, e nem é mais exposta no frontend — só
+    # continua disponível aqui por segurança/depuração futura.
     if moment_override and _is_test_mode() and moment_override in MOMENT_LABELS:
         current_moment = moment_override
     else:
@@ -111,19 +120,18 @@ def serve_index():
 
 @app.get("/api/config")
 def get_config():
-    return {
-        "personas": PERSONAS,
-        "moments": [{"id": m, "label": MOMENT_LABELS[m]} for m in MOMENTS],
-        "test_mode": _is_test_mode(),
-    }
+    return {"personas": PERSONAS}
 
 
 @app.post("/api/reset")
 async def reset_conversation(user_id: str = Form(...)):
     """
-    Apaga o histórico de HOJE de uma persona, para permitir reiniciar
-    os testes do zero. Dias anteriores não são afetados.
+    Apaga o histórico de hoje de uma persona. Não exposto no frontend —
+    só existe fora de produção, como ferramenta de depuração manual.
     """
+    if not _is_test_mode():
+        return JSONResponse(status_code=404, content={"detail": "Not found"})
+
     session_date = date.today().isoformat()
     deleted = delete_today_messages(user_id, session_date)
     return {"deleted": deleted, "session_date": session_date}

@@ -7,14 +7,15 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
     )
 
-    # OpenAI
+    # OpenAI — LLM (conversa) e STT (transcrição de voz)
     openai_api_key: str
-    # openai_model: str = "gpt-4o"
     openai_model: str = "gpt-5.6-luna"
+    stt_model: str = "gpt-4o-transcribe"
 
-    # ElevenLabs (opcionais na Fase 1)
+    # ElevenLabs — TTS (síntese de voz)
     elevenlabs_api_key: str = ""
     elevenlabs_voice_id: str = ""
+    elevenlabs_model: str = "eleven_multilingual_v2"  # suporta português
 
     # Aplicação
     app_env: str = "development"

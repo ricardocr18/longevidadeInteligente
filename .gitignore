@@ -15,6 +15,9 @@ wheels/
 # Banco de dados local (gerado por scripts/seed_db.py — nunca versionar)
 *.db
 
+# Arquivoi de voz
+*.mp3
+
 # Sistema operacional / editor
 .DS_Store
 Thumbs.db

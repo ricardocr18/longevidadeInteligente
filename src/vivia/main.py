@@ -10,6 +10,7 @@ from vivia.memory.repository import (
     format_summaries_for_prompt,
     save_message,
 )
+from vivia.memory.summarizer import ensure_summaries_up_to_date
 
 MOMENT_LABELS = {
     "acordar": "Ao acordar",
@@ -90,6 +91,9 @@ def run() -> None:
 
     persona = load_persona(user_id)
     persona_text = persona_to_prompt(persona)
+
+    session_date_for_check = date.today().isoformat()
+    ensure_summaries_up_to_date(user_id, before_date=session_date_for_check)
 
     summaries = get_recent_summaries(user_id)
     summaries_text = format_summaries_for_prompt(summaries)

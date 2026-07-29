@@ -5,28 +5,15 @@ const player = document.getElementById("player");
 const textForm = document.getElementById("text-form");
 const textInput = document.getElementById("text-input");
 const personaSelect = document.getElementById("persona-select");
-const momentSelect = document.getElementById("moment-select");
-const momentField = document.getElementById("moment-field");
-const settingsToggle = document.getElementById("settings-toggle");
-const settingsPanel = document.getElementById("settings-panel");
-const restartBtn = document.getElementById("restart-btn");
 
 let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
-let testMode = false;
 let sessionStarted = false;
 let recordingStartedAt = 0;
 
-// Duração mínima de gravação — abaixo disso, é bem provável que o
-// áudio esteja vazio/silencioso, o que faz o modelo de transcrição
-// "alucinar" texto aleatório (às vezes em outro idioma) em vez de
-// simplesmente retornar vazio.
 const MIN_RECORDING_MS = 700;
 
-// Escolhe o melhor codec suportado pelo navegador, em vez de deixar o
-// MediaRecorder decidir sozinho — evita que o servidor receba um
-// container que a API de transcrição interpreta mal.
 function pickMimeType() {
   const candidates = [
     "audio/webm;codecs=opus",
@@ -37,7 +24,7 @@ function pickMimeType() {
   for (const type of candidates) {
     if (MediaRecorder.isTypeSupported(type)) return type;
   }
-  return ""; // deixa o navegador decidir, último recurso
+  return "";
 }
 
 function extensionFor(mimeType) {
@@ -81,9 +68,6 @@ function addBubble(who, text) {
   return bubble;
 }
 
-// Player de conferência: toca de volta exatamente o que foi gravado,
-// antes/junto do envio — ajuda a diagnosticar na hora se a captura
-// pegou a voz de verdade ou só silêncio.
 function addRecordingPreview(blob) {
   const wrap = document.createElement("div");
   wrap.className = "bubble user recording-preview";
@@ -99,11 +83,10 @@ function addRecordingPreview(blob) {
   wrap.scrollIntoView({ behavior: "smooth", block: "end" });
 }
 
-// ── Configuração inicial (personas / momentos / modo de teste) ─────
+// ── Configuração inicial (só personas, sem modo de teste) ──────────
 async function loadConfig() {
   const res = await fetch("/api/config");
   const cfg = await res.json();
-  testMode = cfg.test_mode;
 
   personaSelect.innerHTML = "";
   cfg.personas.forEach((p) => {
@@ -112,25 +95,10 @@ async function loadConfig() {
     opt.textContent = p.nome;
     personaSelect.appendChild(opt);
   });
-
-  if (testMode) {
-    momentField.hidden = false;
-    momentSelect.innerHTML = "";
-    cfg.moments.forEach((m) => {
-      const opt = document.createElement("option");
-      opt.value = m.id;
-      opt.textContent = m.label;
-      momentSelect.appendChild(opt);
-    });
-  }
 }
 
 function currentPersona() {
   return personaSelect.value;
-}
-
-function currentMoment() {
-  return testMode ? momentSelect.value : "";
 }
 
 // ── Reprodução de áudio (base64 -> player) ──────────────────────────
@@ -149,12 +117,11 @@ function playAudioBase64(b64) {
   });
 }
 
-// ── Chamadas à API ───────────────────────────────────────────────────
+// ── Chamadas à API — o momento é sempre automático (relógio real) ──
 async function startSession() {
   setStatus("thinking");
   const form = new FormData();
   form.append("user_id", currentPersona());
-  if (testMode && currentMoment()) form.append("moment", currentMoment());
 
   const res = await fetch("/api/start", { method: "POST", body: form });
   const data = await res.json();
@@ -171,7 +138,6 @@ async function sendText(text) {
   const form = new FormData();
   form.append("user_id", currentPersona());
   form.append("text", text);
-  if (testMode && currentMoment()) form.append("moment", currentMoment());
 
   const res = await fetch("/api/message", { method: "POST", body: form });
   const data = await res.json();
@@ -186,7 +152,6 @@ async function sendAudio(blob, mimeType) {
   const ext = extensionFor(mimeType);
   const form = new FormData();
   form.append("user_id", currentPersona());
-  if (testMode && currentMoment()) form.append("moment", currentMoment());
   form.append("audio", blob, `gravacao.${ext}`);
 
   const res = await fetch("/api/voice-message", { method: "POST", body: form });
@@ -231,10 +196,6 @@ async function toggleRecording() {
       const usedMimeType = mediaRecorder.mimeType || mimeType || "audio/webm";
       const blob = new Blob(audioChunks, { type: usedMimeType });
 
-      console.log(
-        `[Vivia] gravação: ${durationMs}ms, ${blob.size} bytes, tipo: ${usedMimeType}`
-      );
-
       if (durationMs < MIN_RECORDING_MS || blob.size < 1000) {
         setStatus(
           "idle",
@@ -266,29 +227,6 @@ textForm.addEventListener("submit", async (e) => {
   textInput.value = "";
   if (!sessionStarted) await startSession();
   await sendText(text);
-});
-
-settingsToggle.addEventListener("click", () => {
-  const isHidden = settingsPanel.hidden;
-  settingsPanel.hidden = !isHidden;
-  settingsToggle.setAttribute("aria-expanded", String(isHidden));
-});
-
-restartBtn.addEventListener("click", async () => {
-  restartBtn.disabled = true;
-  restartBtn.textContent = "Reiniciando…";
-  try {
-    const form = new FormData();
-    form.append("user_id", currentPersona());
-    await fetch("/api/reset", { method: "POST", body: form });
-  } catch (err) {
-    console.warn("[Vivia] falha ao limpar histórico no servidor:", err);
-  }
-  transcript.innerHTML = "";
-  sessionStarted = false;
-  setStatus("idle");
-  restartBtn.disabled = false;
-  restartBtn.textContent = "Reiniciar conversa";
 });
 
 personaSelect.addEventListener("change", () => {

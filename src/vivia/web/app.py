@@ -1,5 +1,4 @@
 import base64
-from datetime import date
 from pathlib import Path
 
 from fastapi import FastAPI, UploadFile, File, Form
@@ -9,7 +8,8 @@ from langchain_core.messages import HumanMessage, AIMessage
 
 from vivia.config import settings
 from vivia.graph.builder import build_graph
-from vivia.graph.router import MOMENTS, get_current_moment
+from vivia.graph.router import MOMENTS, get_current_moment, today_in_brazil
+from vivia.memory.db import init_db
 from vivia.personas.loader import load_persona, persona_to_prompt
 from vivia.memory.repository import (
     get_recent_summaries,
@@ -45,6 +45,17 @@ PERSONAS = [
 _graph = None
 
 
+@app.on_event("startup")
+def on_startup():
+    """
+    Garante que as tabelas existem antes de aceitar qualquer requisição.
+    Essencial no Railway: o volume persistente pode estar vazio no
+    primeiro deploy, e não há como rodar scripts/seed_db.py manualmente
+    lá com a mesma facilidade que localmente.
+    """
+    init_db()
+
+
 def _get_graph():
     global _graph
     if _graph is None:
@@ -67,10 +78,8 @@ def _rebuild_messages(rows: list[dict]) -> list:
 
 
 def _process_turn(user_id: str, user_text: str | None, moment_override: str | None) -> dict:
-    session_date = date.today().isoformat()
+    session_date = today_in_brazil().isoformat()
 
-    # Checagem de virada de dia: se algum dia anterior ficou sem resumo,
-    # gera agora, antes de continuar. Barato quando não há pendência.
     ensure_summaries_up_to_date(user_id, before_date=session_date)
 
     persona = load_persona(user_id)
@@ -79,9 +88,6 @@ def _process_turn(user_id: str, user_text: str | None, moment_override: str | No
 
     messages = _rebuild_messages(get_today_messages(user_id, session_date))
 
-    # Em produção, o momento SEMPRE vem do relógio real. A escolha manual
-    # só existe fora de produção, e nem é mais exposta no frontend — só
-    # continua disponível aqui por segurança/depuração futura.
     if moment_override and _is_test_mode() and moment_override in MOMENT_LABELS:
         current_moment = moment_override
     else:
@@ -123,16 +129,18 @@ def get_config():
     return {"personas": PERSONAS}
 
 
+@app.get("/api/health")
+def health_check():
+    """Endpoint simples para o Railway confirmar que a aplicação subiu."""
+    return {"status": "ok"}
+
+
 @app.post("/api/reset")
 async def reset_conversation(user_id: str = Form(...)):
-    """
-    Apaga o histórico de hoje de uma persona. Não exposto no frontend —
-    só existe fora de produção, como ferramenta de depuração manual.
-    """
     if not _is_test_mode():
         return JSONResponse(status_code=404, content={"detail": "Not found"})
 
-    session_date = date.today().isoformat()
+    session_date = today_in_brazil().isoformat()
     deleted = delete_today_messages(user_id, session_date)
     return {"deleted": deleted, "session_date": session_date}
 

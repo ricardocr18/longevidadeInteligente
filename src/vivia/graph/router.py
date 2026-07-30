@@ -1,5 +1,12 @@
-from datetime import datetime
+from datetime import datetime, date
+from zoneinfo import ZoneInfo
 
+# Fixo em horário do Brasil, independente de onde o servidor estiver
+# rodando (o Railway, por exemplo, roda os containers em UTC por padrão).
+# Sem isso, a detecção automática de momento do dia ficaria errada em
+# produção — e como não existe mais escolha manual no frontend, esse
+# erro passaria despercebido até alguém notar a Vivia "fora de hora".
+BRAZIL_TZ = ZoneInfo("America/Sao_Paulo")
 
 MOMENTS = [
     "acordar",
@@ -22,9 +29,23 @@ MOMENT_SCHEDULE = {
 }
 
 
+def now_in_brazil() -> datetime:
+    """Horário atual, sempre no fuso de São Paulo."""
+    return datetime.now(BRAZIL_TZ)
+
+
+def today_in_brazil() -> date:
+    """Data atual (o 'dia' civil), sempre no fuso de São Paulo.
+
+    Importante perto da meia-noite: usar isso em vez de date.today()
+    evita que o servidor (rodando em UTC) ache que já é o dia seguinte
+    quando no Brasil ainda são, por exemplo, 21h."""
+    return now_in_brazil().date()
+
+
 def get_current_moment() -> str:
-    """Retorna o momento do dia baseado no horário atual."""
-    hour = datetime.now().hour
+    """Retorna o momento do dia baseado no horário atual do Brasil."""
+    hour = now_in_brazil().hour
     for moment, (start, end) in MOMENT_SCHEDULE.items():
         if start <= hour < end:
             return moment

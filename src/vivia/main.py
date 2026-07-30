@@ -3,7 +3,7 @@ from datetime import date
 from langchain_core.messages import HumanMessage
 from vivia.config import settings
 from vivia.graph.builder import build_graph
-from vivia.graph.router import MOMENTS, get_current_moment
+from vivia.graph.router import MOMENTS, get_current_moment, today_in_brazil
 from vivia.personas.loader import load_persona, persona_to_prompt
 from vivia.memory.repository import (
     get_recent_summaries,
@@ -92,14 +92,14 @@ def run() -> None:
     persona = load_persona(user_id)
     persona_text = persona_to_prompt(persona)
 
-    session_date_for_check = date.today().isoformat()
+    session_date_for_check = today_in_brazil().isoformat()
     ensure_summaries_up_to_date(user_id, before_date=session_date_for_check)
 
     summaries = get_recent_summaries(user_id)
     summaries_text = format_summaries_for_prompt(summaries)
 
     current_moment = _choose_initial_moment()
-    session_date = date.today().isoformat()
+    session_date = today_in_brazil().isoformat()
 
     graph = build_graph()
 

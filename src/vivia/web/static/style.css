@@ -28,7 +28,8 @@ html, body {
   font-family: var(--font-body);
   font-size: 18px;
   line-height: 1.5;
-  min-height: 100vh;
+  height: 100%;
+  overflow: hidden; /* só o .transcript rola — o resto fica fixo na tela */
 }
 
 .sr-only {
@@ -44,12 +45,22 @@ html, body {
   outline-offset: 2px;
 }
 
+/* ── App shell — cabeçalho fixo, conversa rolável, controle fixo ──── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh; /* altura real da viewport em celular, ignora barra do navegador */
+}
+
 /* ── Topbar ───────────────────────────────────────────────────────── */
 .topbar {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
+  padding: 16px 24px;
+  background: var(--bg);
 }
 
 .brand {
@@ -57,14 +68,14 @@ html, body {
   align-items: center;
   gap: 8px;
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
   color: var(--primary-dk);
 }
 
 .brand-mark {
   color: var(--accent-dk);
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .persona-picker select {
@@ -78,21 +89,94 @@ html, body {
   cursor: pointer;
 }
 
-/* ── Stage (o coração da tela) ────────────────────────────────────── */
-.stage {
+/* ── Transcript — a ÚNICA área que rola ──────────────────────────── */
+.transcript {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 24px 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 24px 24px 8px;
-  text-align: center;
+  gap: 14px;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.orb-wrap { position: relative; width: 168px; height: 168px; margin: 12px 0; }
+.bubble {
+  max-width: 82%;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  font-size: 17px;
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+}
 
+.bubble.vivia {
+  align-self: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 6px;
+}
+
+.bubble.user {
+  align-self: flex-end;
+  background: var(--primary);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+
+.bubble .who {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+
+.bubble.recording-preview {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+}
+.bubble.recording-preview audio {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── Barra de controle — FIXA embaixo, sempre visível ────────────── */
+.control-bar {
+  flex-shrink: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -6px 16px rgba(30, 43, 38, 0.06);
+  padding: 10px 20px calc(14px + env(safe-area-inset-bottom));
+}
+
+.status-text {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-soft);
+  min-height: 18px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── Orb — agora compacta, vive dentro da barra fixa ─────────────── */
 .orb {
   position: relative;
-  width: 168px;
-  height: 168px;
+  flex-shrink: 0;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   border: none;
   background: linear-gradient(160deg, var(--primary), var(--primary-dk));
@@ -104,12 +188,12 @@ html, body {
   box-shadow: var(--shadow);
   transition: transform 160ms ease;
 }
-.orb:hover { transform: scale(1.03); }
-.orb:active { transform: scale(0.97); }
+.orb:hover { transform: scale(1.04); }
+.orb:active { transform: scale(0.96); }
 
 .orb-ring {
   position: absolute;
-  inset: -14px;
+  inset: -8px;
   border-radius: 50%;
   border: 2px solid var(--primary);
   opacity: 0;
@@ -158,34 +242,28 @@ html, body {
   .orb-ring { animation: none !important; }
 }
 
-.status-text {
-  margin: 4px 0 20px;
-  font-size: 17px;
-  color: var(--ink-soft);
-  min-height: 24px;
-}
-
-/* ── Formulário de texto (alternativa à voz) ─────────────────────── */
+/* ── Formulário de texto — ao lado da orb, preenche o resto da barra */
 .text-form {
-  width: 100%;
-  max-width: 480px;
+  flex: 1 1 auto;
   display: flex;
   gap: 10px;
-  margin-bottom: 8px;
+  min-width: 0; /* permite o input encolher em telas estreitas */
 }
 
 .text-form input {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   font-family: var(--font-body);
   font-size: 17px;
   padding: 14px 16px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--bg);
   color: var(--ink);
 }
 
 .send-btn {
+  flex-shrink: 0;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 700;
@@ -198,62 +276,10 @@ html, body {
 }
 .send-btn:hover { background: var(--primary-dk); }
 
-/* ── Transcript ───────────────────────────────────────────────────── */
-.transcript {
-  max-width: 640px;
-  margin: 8px auto 40px;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.bubble {
-  max-width: 82%;
-  padding: 14px 18px;
-  border-radius: var(--radius);
-  font-size: 17px;
-  line-height: 1.5;
-  box-shadow: var(--shadow);
-}
-
-.bubble.vivia {
-  align-self: flex-start;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-bottom-left-radius: 6px;
-}
-
-.bubble.user {
-  align-self: flex-end;
-  background: var(--primary);
-  color: #fff;
-  border-bottom-right-radius: 6px;
-}
-
-.bubble .who {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  opacity: 0.65;
-  margin-bottom: 4px;
-}
-
-.bubble.recording-preview {
-  background: var(--bg);
-  border: 1px dashed var(--border);
-}
-.bubble.recording-preview audio {
-  display: block;
-  width: 100%;
-  margin-top: 8px;
-}
-
 /* ── Responsivo ───────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   html, body { font-size: 17px; }
-  .orb-wrap, .orb { width: 140px; height: 140px; }
-  .brand { font-size: 22px; }
+  .brand { font-size: 21px; }
+  .orb { width: 64px; height: 64px; }
+  .send-btn { padding: 0 16px; font-size: 15px; }
 }

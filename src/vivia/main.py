@@ -4,6 +4,7 @@ from langchain_core.messages import HumanMessage
 from vivia.config import settings
 from vivia.graph.builder import build_graph
 from vivia.graph.router import MOMENTS, get_current_moment, today_in_brazil
+from vivia.memory.db import init_db
 from vivia.personas.loader import load_persona, persona_to_prompt
 from vivia.memory.repository import (
     get_recent_summaries,
@@ -80,6 +81,13 @@ def _choose_initial_moment() -> str:
 
 
 def run() -> None:
+    # Garante que as tabelas existem antes de qualquer operação de banco.
+    # Sem isso, um vivia.db novo (ou uma máquina que nunca rodou o
+    # terminal antes) quebra com "no such table: messages" — o
+    # web/app.py já faz isso automaticamente no boot, mas o terminal
+    # precisa fazer essa checagem por conta própria também.
+    init_db()
+
     print("\n══════════════════════════════════════")
     print("          V I V I A  —  POC           ")
     print("══════════════════════════════════════")
@@ -152,8 +160,6 @@ def run() -> None:
                 f"{MOMENT_LABELS[novo_momento]}\n"
             )
 
-            # Vivia inicia o novo momento proativamente, mantendo o
-            # histórico da conversa do dia (mesma lógica do primeiro turno).
             result = _invoke_with_feedback(graph, state)
             if result is None:
                 continue

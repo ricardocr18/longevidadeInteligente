@@ -8,39 +8,43 @@
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="brand">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span class="brand-name">Vivia</span>
-    </div>
-    <div class="persona-picker">
-      <label for="persona-select" class="sr-only">Conversando com</label>
-      <select id="persona-select"></select>
-    </div>
-  </header>
+  <div class="app-shell">
 
-  <main class="stage">
-    <div class="orb-wrap">
-      <button id="mic-btn" class="orb" aria-label="Toque para falar com a Vivia">
-        <span class="orb-ring"></span>
-        <span class="orb-core">
-          <svg id="mic-icon" viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
-            <path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/>
-            <path fill="currentColor" d="M19 11a1 1 0 0 0-2 0 5 5 0 0 1-10 0 1 1 0 0 0-2 0 7 7 0 0 0 6 6.93V20H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.07A7 7 0 0 0 19 11Z"/>
-          </svg>
-        </span>
-      </button>
-    </div>
-    <p id="status-text" class="status-text">Toque para falar com a Vivia</p>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-name">Vivia</span>
+      </div>
+      <div class="persona-picker">
+        <label for="persona-select" class="sr-only">Conversando com</label>
+        <select id="persona-select"></select>
+      </div>
+    </header>
 
-    <form id="text-form" class="text-form">
-      <label for="text-input" class="sr-only">Ou digite sua mensagem</label>
-      <input id="text-input" type="text" placeholder="Ou digite aqui, se preferir…" autocomplete="off">
-      <button type="submit" class="send-btn" aria-label="Enviar mensagem">Enviar</button>
-    </form>
-  </main>
+    <section id="transcript" class="transcript" aria-live="polite" aria-label="Conversa"></section>
 
-  <section id="transcript" class="transcript" aria-live="polite" aria-label="Conversa"></section>
+    <footer class="control-bar">
+      <p id="status-text" class="status-text">Toque para falar com a Vivia</p>
+      <div class="control-row">
+        <button id="mic-btn" class="orb" aria-label="Toque para falar com a Vivia">
+          <span class="orb-ring"></span>
+          <span class="orb-core">
+            <svg id="mic-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z"/>
+              <path fill="currentColor" d="M19 11a1 1 0 0 0-2 0 5 5 0 0 1-10 0 1 1 0 0 0-2 0 7 7 0 0 0 6 6.93V20H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.07A7 7 0 0 0 19 11Z"/>
+            </svg>
+          </span>
+        </button>
+
+        <form id="text-form" class="text-form">
+          <label for="text-input" class="sr-only">Ou digite sua mensagem</label>
+          <input id="text-input" type="text" placeholder="Ou digite aqui, se preferir…" autocomplete="off">
+          <button type="submit" class="send-btn" aria-label="Enviar mensagem">Enviar</button>
+        </form>
+      </div>
+    </footer>
+
+  </div>
 
   <audio id="player" hidden></audio>
 

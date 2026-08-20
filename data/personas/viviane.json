@@ -5,15 +5,26 @@
   "idade": 80,
   "sexo": "mulher",
   "estado_civil": "casada",
-  "conjuge": { "nome": "não especificado no roteiro", "observacao": "Tem escritório de engenharia." },
+  "conjuge": {
+    "nome": "não especificado no roteiro",
+    "observacao": "Tem escritório de engenharia."
+  },
   "filhos": [
-    { "nome": "Vania", "situacao": "Casada, trabalha em um escritório." },
-    { "nome": "Vanusa", "situacao": "Casada, se recuperando de um câncer de mama — momento delicado para Viviane." }
+    {
+      "nome": "Vania",
+      "situacao": "Casada, trabalha em um escritório."
+    },
+    {
+      "nome": "Vanusa",
+      "situacao": "Casada, se recuperando de um câncer de mama — momento delicado para Viviane."
+    }
   ],
   "netos": [
-    { "nome": "Stefani", "observacao": "Adolescente, filha de Vanusa. Viviane às vezes fica com ela." }
+    {
+      "nome": "Stefani",
+      "observacao": "Adolescente, filha de Vanusa. Viviane às vezes fica com ela."
+    }
   ],
-
   "biografia": {
     "profissao": "Dona de casa. Formada em Pedagogia, fez estágio e trabalhou em escola por 3 anos após o casamento.",
     "instrucao": "Ensino superior (Pedagogia).",
@@ -24,9 +35,13 @@
       "Vive atualmente um momento sensível: a filha Vanusa está se recuperando de câncer de mama."
     ]
   },
-
   "saude": {
-    "comorbidades": ["hipertensão", "diabetes", "sobrepeso", "depressão"],
+    "comorbidades": [
+      "hipertensão",
+      "diabetes",
+      "sobrepeso",
+      "depressão"
+    ],
     "medicamentos": [
       "Metformina — parte da manhã ('caixinha azul') e segunda dose antes do almoço",
       "Losartana — manhã ('caixinha azul')",
@@ -37,17 +52,21 @@
     "alimentacao": "Tenta seguir dieta rígida, mas costuma abandonar antes de completar.",
     "alertas": [
       "Comorbidade de depressão — atenção redobrada a sinais de desesperança, isolamento ou fala que sugira risco. Seguir Protocolo de Dia Difícil nível grave sem hesitar caso apareçam sinais de risco à segurança.",
-      "Mora sozinha — reforçar checagens de segurança física e vínculo social externo com mais frequência do que faria com quem mora acompanhado."
-    ]
+      "Mora sozinha — reforçar checagens de segurança física e vínculo social externo com mais frequência do que faria com quem mora acompanhado.",
+      "Dificuldade de locomoção (coluna/joelhos) reforça a importância de segurança no ambiente doméstico (tapetes soltos, iluminação, degraus) e de respeitar rigorosamente os limites de dor na fisioterapia funcional guiada — nunca insistir além do que o corpo sinalizar."
+    ],
+    "peso_kg": 75,
+    "altura_m": 1.63,
+    "imc": 28.2,
+    "visao": "Relata vista cansada.",
+    "mobilidade": "Dificuldade de locomoção por conta da coluna e dos joelhos, decorrente do sobrepeso."
   },
-
   "contexto_social": {
     "arranjo_domiciliar": "Mora sozinha, com apoio de uma diarista durante a semana.",
     "rede_social": "Dá suporte ocasional à filha mais velha; fica com a neta adolescente Stefani; frequenta a igreja e um grupo de senhoras voluntárias.",
     "religiao": "Evangélica — aguardar a própria pessoa trazer o tema antes de referenciar.",
     "nivel_socioeconomico_rotina": "Contexto familiar com recursos (marido com escritório de engenharia); apoio de diarista indica situação financeira confortável. Pode-se sugerir atividades e produtos com um pouco mais de amplitude do que em perfis de renda mais restrita, sem exagerar."
   },
-
   "preferencias": {
     "entretenimento": [
       "ler romances",
@@ -58,7 +77,6 @@
     "instrumento_musical": "piano",
     "letramento_digital": "Celular, WhatsApp, uso básico de internet — priorizar mensagens curtas e voz."
   },
-
   "plano_cuidado": [
     "Tomar Metformina e Losartana pela manhã ('caixinha azul').",
     "Tomar segunda dose de Metformina antes do almoço.",
@@ -70,14 +88,24 @@
     "Incentivar contato com a filha Vanusa (em recuperação) sem pressionar — respeitar o tempo dela para topar.",
     "Fechar o dia com prática de respiração 4-7-8 quando o dia tiver sido mais pesado emocionalmente."
   ],
-
   "objetivos_indicadores": [
-    { "objetivo": "Manter glicemia e pressão arterial controladas", "indicador": "Medicação tomada nos horários certos; glicemia registrada 2x/dia." },
-    { "objetivo": "Cuidar da saúde emocional dado o quadro de depressão", "indicador": "Humor registrado diariamente; nenhum sinal de risco sem escalonamento imediato." },
-    { "objetivo": "Reduzir sedentarismo com segurança", "indicador": "Adesão às sessões de fisioterapia funcional, respeitando limites de dor." },
-    { "objetivo": "Manter vínculo social apesar de morar sozinha", "indicador": "Contato regular com filhas, neta e grupo de voluntárias/igreja." }
+    {
+      "objetivo": "Manter glicemia e pressão arterial controladas",
+      "indicador": "Medicação tomada nos horários certos; glicemia registrada 2x/dia."
+    },
+    {
+      "objetivo": "Cuidar da saúde emocional dado o quadro de depressão",
+      "indicador": "Humor registrado diariamente; nenhum sinal de risco sem escalonamento imediato."
+    },
+    {
+      "objetivo": "Reduzir sedentarismo com segurança",
+      "indicador": "Adesão às sessões de fisioterapia funcional, respeitando limites de dor."
+    },
+    {
+      "objetivo": "Manter vínculo social apesar de morar sozinha",
+      "indicador": "Contato regular com filhas, neta e grupo de voluntárias/igreja."
+    }
   ],
-
   "rotina_dia_exemplo": {
     "acordar": "07h00",
     "depois_cafe_proposito_do_dia": "08h30",
@@ -88,12 +116,31 @@
     "jantar": "19h10",
     "fechamento_biopsicossocial": "21h00"
   },
-
   "exemplos_dialogo": [
-    { "momento": "acordar", "vivia": "Bom dia, Senhora Viviane. Como você está hoje?", "viviane": "Dormi picado, acordei pensando na vida." },
-    { "momento": "acordar", "vivia": "Obrigada por me contar. Quer falar um pouco sobre o que passou pela sua cabeça?", "viviane": "Não sei se tenho vontade de falar sobre isso agora, Vivia." },
-    { "momento": "fisioterapia_funcional", "vivia": "Avise se sentir dor, tá bem?", "viviane": "No sexto já está ardendo." },
-    { "momento": "monitor_de_humor", "vivia": "De 0 a 10, como está seu ânimo agora?", "viviane": "Subiu para 5. Ainda sinto falta da Vanusa, mas o trabalho de hoje me distraiu." },
-    { "momento": "fechamento_biopsicossocial", "vivia": "Bom número. Três motivos de gratidão de hoje?", "viviane": "Hoje só consigo pensar em um: o cheiro do almoço. Foi um dia mais pesado." }
+    {
+      "momento": "acordar",
+      "vivia": "Bom dia, Senhora Viviane. Como você está hoje?",
+      "viviane": "Dormi picado, acordei pensando na vida."
+    },
+    {
+      "momento": "acordar",
+      "vivia": "Obrigada por me contar. Quer falar um pouco sobre o que passou pela sua cabeça?",
+      "viviane": "Não sei se tenho vontade de falar sobre isso agora, Vivia."
+    },
+    {
+      "momento": "fisioterapia_funcional",
+      "vivia": "Avise se sentir dor, tá bem?",
+      "viviane": "No sexto já está ardendo."
+    },
+    {
+      "momento": "monitor_de_humor",
+      "vivia": "De 0 a 10, como está seu ânimo agora?",
+      "viviane": "Subiu para 5. Ainda sinto falta da Vanusa, mas o trabalho de hoje me distraiu."
+    },
+    {
+      "momento": "fechamento_biopsicossocial",
+      "vivia": "Bom número. Três motivos de gratidão de hoje?",
+      "viviane": "Hoje só consigo pensar em um: o cheiro do almoço. Foi um dia mais pesado."
+    }
   ]
 }

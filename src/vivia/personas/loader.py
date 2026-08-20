@@ -33,6 +33,45 @@ def _format_familia(profile: dict) -> str:
     return "\n".join(lines)
 
 
+def _format_limitacoes_sensoriais_fisicas(saude: dict) -> str:
+    """
+    Monta a seção de limitações sensoriais/físicas (visão, audição,
+    mobilidade, dados antropométricos) — alimenta o item 8 do
+    system_prompt.md, que orienta qual canal (voz vs texto) priorizar
+    e o cuidado redobrado em sugestões de atividade física.
+
+    Todos os campos são opcionais — nem toda persona vai ter todos.
+    """
+    lines = []
+
+    peso = saude.get("peso_kg")
+    altura = saude.get("altura_m")
+    imc = saude.get("imc")
+    if peso or altura or imc:
+        partes = []
+        if peso:
+            partes.append(f"{peso}kg")
+        if altura:
+            partes.append(f"{altura}m")
+        if imc:
+            partes.append(f"IMC {imc}")
+        lines.append("Dados antropométricos: " + ", ".join(partes))
+
+    visao = saude.get("visao")
+    if visao:
+        lines.append(f"Visão: {visao}")
+
+    audicao = saude.get("audicao")
+    if audicao:
+        lines.append(f"Audição: {audicao}")
+
+    mobilidade = saude.get("mobilidade")
+    if mobilidade:
+        lines.append(f"Mobilidade: {mobilidade}")
+
+    return "\n".join(lines)
+
+
 def persona_to_prompt(profile: dict) -> str:
     """
     Serializa o perfil biográfico vivo (estrutura aninhada) em texto
@@ -74,8 +113,18 @@ def persona_to_prompt(profile: dict) -> str:
         f"Alimentação: {saude.get('alimentacao', 'não informada')}",
     ]
 
+    limitacoes = _format_limitacoes_sensoriais_fisicas(saude)
+    if limitacoes:
+        lines.append("")
+        lines.append(
+            "── Limitações sensoriais e físicas "
+            "(usar para calibrar canal — regra 8 do prompt) ──"
+        )
+        lines.append(limitacoes)
+
     alertas = saude.get("alertas", [])
     if alertas:
+        lines.append("")
         lines.append("Alertas de atenção especial:")
         for a in alertas:
             lines.append(f"  ⚠ {a}")

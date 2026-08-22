@@ -1,7 +1,7 @@
 {
   "user_id": "joao",
   "nome": "João",
-  "tratamento": "Senhor João",
+  "tratamento": "Sr João",
   "idade": 65,
   "sexo": "homem",
   "estado_civil": "casado",
@@ -48,7 +48,7 @@
     "alimentacao": "Come de tudo, faz 4 refeições por dia.",
     "alertas": [
       "Ansiedade: episódios pontuais (coração disparado, agonia) já registrados 2x em uma semana em cena de dia difícil — se recorrência aumentar, sugerir avaliação médica.",
-      "Combinação de miopia/olhos cansados com deficiência auditiva baixa é uma tensão de design: texto favorece quem tem dificuldade auditiva, voz favorece quem tem dificuldade visual. Sugestão: mensagens de voz com boa clareza/volume, e texto de apoio com fonte grande quando por escrito — não depender de um canal só."
+      "Combinação de miopia/olhos cansados com baixa deficiência auditiva é uma tensão de design: texto favorece quem tem dificuldade auditiva, voz favorece quem tem dificuldade visual. Sugestão: mensagens de voz com boa clareza/volume, e texto de apoio com fonte grande quando por escrito — não depender de um canal só."
     ],
     "peso_kg": 68,
     "altura_m": 1.74,
@@ -121,18 +121,18 @@
   "exemplos_dialogo": [
     {
       "momento": "acordar",
-      "vivia": "Bom dia, Senhor João e Dona Lúcia! Dormiram bem?",
+      "vivia": "Bom dia, Sr João e Dona Lúcia! Dormiram bem?",
       "joao": "Dormi bem, sim, tranquilo."
     },
     {
       "momento": "antes_de_sair",
-      "vivia": "Senhor João, antes de ir: topa 2 minutinhos de alongamento no pescoço?",
+      "vivia": "Sr João, antes de ir: topa 2 minutinhos de alongamento no pescoço?",
       "joao": "Topo, rapidinho."
     },
     {
       "momento": "meio_manha",
       "vivia": "Pausa rápida: como está a sua manhã?",
-      "joao": "..."
+      "joao": "Tranquila, bem tranquila."
     },
     {
       "momento": "jantar",

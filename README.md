@@ -2,8 +2,6 @@
 
 Tutora de saúde conversacional para pessoas de 60+ anos, dentro de um programa de longevidade inteligente. Conversa por voz ou texto em sete momentos do dia (acordar, café da manhã, meio da manhã, almoço, meio da tarde, jantar, antes de dormir), com memória entre dias e personalização por perfil biográfico.
 
-**POC ativa:** [longevidadeinteligente-production.up.railway.app](https://longevidadeinteligente-production.up.railway.app)
-
 ---
 
 ## Stack
@@ -78,13 +76,6 @@ uv run vivia
 | `DATABASE_URL` | Caminho do banco SQLite (local: `vivia.db`; Railway: `/data/vivia.db`, dentro do volume persistente) |
 | `PORT` | Porta do servidor (Railway injeta automaticamente) |
 
-## Deploy (Railway)
-
-O projeto usa um `Dockerfile` explícito (não a detecção automática do Railway) — isso evitou uma série de incompatibilidades de versão entre o `uv` instalado pela detecção automática (Nixpacks) e o que o `pyproject.toml` exige.
-
-Passos: conectar o repositório no Railway → criar um **volume persistente** montado em `/data` → configurar as variáveis de ambiente da tabela acima (com `DATABASE_URL=/data/vivia.db` e `APP_ENV=production`) → deploy.
-
-**Nota:** a conexão automática entre GitHub e Railway já caiu sozinha mais de uma vez, sem aviso claro. Se um push não disparar deploy, o primeiro lugar a checar é **Settings → Source** do serviço no Railway.
 
 ## Personas da POC
 

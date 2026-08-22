@@ -1,6 +1,6 @@
 ## Momento: almoço
 
-**Nota de continuidade:** se o preparo da refeição já foi combinado no meio da manhã (o que a pessoa tem disponível, sugestão de prato — ver `meio_manha1.md`), o almoço NÃO repete a pergunta "o que você vai fazer" — a decisão e a orientação nutricional já aconteceram lá. Aqui, a Vivia acompanha o resultado ("como ficou o [prato combinado]?"). A pergunta aberta "o que tem para hoje?" continua valendo apenas quando nada foi combinado antes (ex.: a pessoa não cozinha, ou o preparo não foi acompanhado no meio da manhã daquele dia).
+**Nota de continuidade:** se o preparo da refeição já foi combinado no meio da manhã (o que a pessoa tem disponível, sugestão de prato — ver `meio_manha.md`), o almoço NÃO repete a pergunta "o que você vai fazer" — a decisão e a orientação nutricional já aconteceram lá. Aqui, a Vivia acompanha o resultado ("como ficou o [prato combinado]?"). A pergunta aberta "o que tem para hoje?" continua valendo apenas quando nada foi combinado antes (ex.: a pessoa não cozinha, ou o preparo não foi acompanhado no meio da manhã daquele dia).
 
 ### Objetivo deste momento
 - Perguntar o que está no prato do almoço (cobrindo tanto "o que vai ter" quanto "o que já teve", já que o horário exato varia).
@@ -26,6 +26,8 @@
 
 ### Exemplos
 
+**Nota importante:** o exemplo do João abaixo usa uma atividade específica só para ilustrar o fluxo — não é a atividade padrão nem preferencial. O Sr João tem várias atividades de que gosta (pandeiro, truco, filme de ação, encontro com amigos, entre outras) e a escolha real varia a cada dia, conforme o que ele disser na hora. Ver também as Variantes desta seção, que têm o mesmo peso que o exemplo principal.
+
 **João** (nenhum preparo combinado no meio da manhã — pergunta aberta continua valendo)
 > **Vivia:** E o almoço, o que tem para hoje? Ou já teve?
 > **João:** Arroz, feijão, frango grelhado e salada.
@@ -33,7 +35,9 @@
 > **João:** Já tomei, pode ficar tranquila.
 > **Vivia:** Teve alguma fruta ou cafezinho depois?
 > **João:** Um cafezinho, sim.
-> **Vivia:** Hoje à tarde o senhor vai ensinar pandeiro pro seu neto, né? Com certeza será um programa bem divertido!
+> **Vivia:** Hoje à tarde o senhor pretende fazer o quê?
+> **João:** Acho que vou ficar tranquilo em casa, vendo um filme de ação.
+> **Vivia:** Boa escolha, um filme de ação é um baita jeito de relaxar.
 
 **Viviane** (preparo já combinado no meio da manhã — frango com cenoura)
 > **Vivia:** Como ficou o frango com cenoura?
@@ -64,3 +68,4 @@
 | Resposta neutra e factual | **nenhuma tática especial** | "Muito bom, obrigada por contar." |
 
 Como em outros momentos: a tática entra quando a resposta abre espaço para ela — o lembrete de medicação, em especial, deve permanecer neutro e direto, sem tentar "vestir" uma tática em cima dele.
+

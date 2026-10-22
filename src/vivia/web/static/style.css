@@ -146,6 +146,19 @@ html, body {
   margin-top: 8px;
 }
 
+/* ── Avatar em vídeo (POC) — HeyGen + ElevenLabs ─────────────────── */
+.bubble.avatar-bubble {
+  max-width: 320px;
+  padding: 14px;
+}
+.bubble.avatar-bubble .avatar-video {
+  display: block;
+  width: 100%;
+  border-radius: calc(var(--radius) - 6px);
+  margin: 6px 0 10px;
+  background: #000;
+}
+
 /* ── Barra de controle — FIXA embaixo, sempre visível ────────────── */
 .control-bar {
   flex-shrink: 0;

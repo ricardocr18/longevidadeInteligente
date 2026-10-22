@@ -6,6 +6,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from langchain_core.messages import HumanMessage, AIMessage
 
+from vivia.avatar.videos import AVATARES_DIR, avatar_video_exists_on_disk, get_avatar_video
 from vivia.config import settings
 from vivia.graph.builder import build_graph
 from vivia.graph.router import MOMENTS, get_current_moment, today_in_brazil
@@ -26,6 +27,11 @@ STATIC_DIR = Path(__file__).parent / "static"
 
 app = FastAPI(title="Vivia POC")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+# Vídeos de avatar (POC) — ver data/avatares/README.md. O diretório precisa
+# existir no disco para o mount não quebrar o boot; os .mp4 em si são
+# adicionados por fora (não fazem parte do código), então é normal essas
+# pastas ficarem vazias até alguém colocar os arquivos lá.
+app.mount("/avatares", StaticFiles(directory=AVATARES_DIR), name="avatares")
 
 MOMENT_LABELS = {
     "acordar": "Ao acordar",
@@ -93,6 +99,21 @@ def _process_turn(user_id: str, user_text: str | None, moment_override: str | No
     else:
         current_moment = get_current_moment()
 
+    # Abertura do momento (ainda sem texto do usuário) + vídeo de avatar
+    # mapeado para este (user_id, moment): pula o LLM e a síntese de voz,
+    # usa a frase fixa já gravada no vídeo (ver avatar/videos.py). Só vale
+    # para a PRIMEIRA mensagem do momento — qualquer resposta do usuário
+    # depois disso cai de volta no fluxo normal (bloco abaixo).
+    if user_text is None:
+        avatar = get_avatar_video(user_id, current_moment)
+        if avatar and avatar_video_exists_on_disk(avatar):
+            save_message(user_id, current_moment, "assistant", avatar.text, session_date)
+            return {
+                "text": avatar.text,
+                "moment": current_moment,
+                "avatar_video_url": f"/avatares/{avatar.filename}",
+            }
+
     if user_text:
         messages.append(HumanMessage(content=user_text))
 
@@ -151,6 +172,10 @@ async def start_session(
     moment: str | None = Form(None),
 ):
     result = _process_turn(user_id, None, moment)
+    if result.get("avatar_video_url"):
+        # Abertura em vídeo: não há áudio pra sintetizar, o frontend toca
+        # o .mp4 (que já tem a voz embutida) em vez do player de áudio.
+        return result
     audio_b64 = base64.b64encode(synthesize_speech(result["text"])).decode("utf-8")
     return {**result, "audio_base64": audio_b64}
 

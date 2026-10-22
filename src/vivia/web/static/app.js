@@ -68,6 +68,44 @@ function addBubble(who, text) {
   return bubble;
 }
 
+// ── Avatar em vídeo (POC) — abertura de alguns momentos vem como vídeo
+// pré-gravado (HeyGen + ElevenLabs) em vez de texto + áudio sintetizado.
+// O vídeo aparece dentro da própria bolha da Vivia, visível (precisa ser
+// visto, diferente do player de áudio que fica escondido).
+function playAvatarVideo(text, videoUrl) {
+  return new Promise((resolve) => {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble vivia avatar-bubble";
+
+    const label = document.createElement("span");
+    label.className = "who";
+    label.textContent = "Vivia";
+
+    const videoEl = document.createElement("video");
+    videoEl.src = videoUrl;
+    videoEl.controls = true;
+    videoEl.playsInline = true;
+    videoEl.className = "avatar-video";
+
+    const caption = document.createElement("span");
+    caption.textContent = text;
+
+    bubble.appendChild(label);
+    bubble.appendChild(videoEl);
+    bubble.appendChild(caption);
+    transcript.appendChild(bubble);
+    bubble.scrollIntoView({ behavior: "smooth", block: "end" });
+
+    setStatus("speaking");
+    const finish = () => {
+      setStatus("idle");
+      resolve();
+    };
+    videoEl.onended = finish;
+    videoEl.play().catch(finish);
+  });
+}
+
 function addRecordingPreview(blob) {
   const wrap = document.createElement("div");
   wrap.className = "bubble user recording-preview";
@@ -126,8 +164,12 @@ async function startSession() {
   const res = await fetch("/api/start", { method: "POST", body: form });
   const data = await res.json();
 
-  addBubble("vivia", data.text);
-  await playAudioBase64(data.audio_base64);
+  if (data.avatar_video_url) {
+    await playAvatarVideo(data.text, data.avatar_video_url);
+  } else {
+    addBubble("vivia", data.text);
+    await playAudioBase64(data.audio_base64);
+  }
   sessionStarted = true;
 }
 
